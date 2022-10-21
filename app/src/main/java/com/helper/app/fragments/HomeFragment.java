@@ -81,9 +81,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, List
                 user = snapshot.getValue(User.class);
                 lblWelcome.setText(getString(R.string.str_header_welcome, user.getFullName()));
                 username.setText(user.getUsername());
-                grade.setText(UIHelper.parseGrade(HomeFragment.this.getContext(), user.getGradeId()));
-                grade.setVisibility(user.getUserType() == Constants.USER_TYPE_STUDENT ? View.VISIBLE : View.GONE);
-                userType.setText(UIHelper.parseUserType(getContext(), user.getUserType()));
                 progress.setVisibility(View.GONE);
                 try {
                     qr.setImageBitmap(BitmapHelper.generateQRCode(user.getId()));

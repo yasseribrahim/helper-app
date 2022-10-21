@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.helper.app.R;
-import com.helper.app.activities.users.admin.UserActivity;
+import com.helper.app.activities.users.admin.UserProfileActivity;
 import com.helper.app.adapters.UsersAdapter;
 import com.helper.app.models.User;
 import com.helper.app.presenters.UsersCallback;
@@ -41,9 +41,8 @@ public class UsersFragment extends Fragment implements UsersCallback, UsersAdapt
     private List<User> users, searchedUsers;
     private int userType;
 
-    public static UsersFragment newInstance(int userType) {
+    public static UsersFragment newInstance() {
         Bundle args = new Bundle();
-        args.putInt(Constants.ARG_ID, userType);
         UsersFragment fragment = new UsersFragment();
         fragment.setArguments(args);
         return fragment;
@@ -71,7 +70,7 @@ public class UsersFragment extends Fragment implements UsersCallback, UsersAdapt
         btnNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), UserActivity.class);
+                Intent intent = new Intent(getContext(), UserProfileActivity.class);
                 intent.putExtra(Constants.ARG_ID, userType);
                 startActivity(intent);
             }
@@ -105,7 +104,7 @@ public class UsersFragment extends Fragment implements UsersCallback, UsersAdapt
     }
 
     private void load() {
-        presenter.getUsersByType(userType);
+        presenter.getUsers();
     }
 
     @Override
@@ -180,7 +179,7 @@ public class UsersFragment extends Fragment implements UsersCallback, UsersAdapt
     @Override
     public void onItemViewListener(int position) {
         User user = searchedUsers.get(position);
-        Intent intent = new Intent(getContext(), UserActivity.class);
+        Intent intent = new Intent(getContext(), UserProfileActivity.class);
         intent.putExtra(Constants.ARG_ID, userType);
         intent.putExtra("object", user);
         startActivity(intent);

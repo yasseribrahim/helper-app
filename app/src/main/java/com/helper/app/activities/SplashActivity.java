@@ -7,6 +7,7 @@ import android.os.Handler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.helper.app.R;
+import com.helper.app.utils.DataManager;
 import com.helper.app.utils.LocaleHelper;
 
 public class SplashActivity extends BaseActivity {
@@ -31,6 +32,9 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         handler = new Handler();
         openApp();
+
+        DataManager.initUserAdmin();
+        DataManager.initAbout();
     }
 
     private boolean isOpenHome() {

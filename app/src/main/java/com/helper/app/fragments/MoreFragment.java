@@ -33,11 +33,10 @@ import com.google.firebase.storage.UploadTask;
 import com.helper.app.CustomApplication;
 import com.helper.app.R;
 import com.helper.app.activities.SplashActivity;
-import com.helper.app.activities.users.admin.UserActivity;
+import com.helper.app.activities.users.admin.UserProfileActivity;
 import com.helper.app.models.User;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.StorageHelper;
-import com.helper.app.utils.UIHelper;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -102,7 +101,6 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
                 username.setText(user.getUsername());
-                userType.setText(UIHelper.parseUserType(getContext(), user.getUserType()));
 
                 Glide.with(MoreFragment.this.getContext()).load(user.getImageProfile()).placeholder(R.drawable.ic_profile).into(profileImage);
             }
@@ -167,9 +165,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.edit:
-                Intent intent = new Intent(getContext(), UserActivity.class);
+                Intent intent = new Intent(getContext(), UserProfileActivity.class);
                 intent.putExtra("object", user);
-                intent.putExtra(Constants.ARG_ID, Constants.USER_TYPE_STUDENT);
                 startActivity(intent);
         }
     }

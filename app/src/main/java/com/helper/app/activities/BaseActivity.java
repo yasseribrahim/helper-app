@@ -59,24 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void openHome() {
-        User user = StorageHelper.getCurrentUser();
-        Intent intent = new Intent(this, LoginActivity.class);
-        if (user != null) {
-            switch (user.getUserType()) {
-                case Constants.USER_TYPE_ADMIN:
-                    intent = new Intent(this, HomeActivity.class);
-                    break;
-                case Constants.USER_TYPE_STUDENT:
-                    intent = new Intent(this, HomeStudentActivity.class);
-                    break;
-                case Constants.USER_TYPE_LECTURER:
-                    intent = new Intent(this, HomeTeacherActivity.class);
-                    break;
-                default:
-                    Toast.makeText(this, "This user not support from app, Please contact with admin", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finishAffinity();
     }

@@ -3,9 +3,6 @@ package com.helper.app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User implements Parcelable {
     private String id;
     private String username;
@@ -13,35 +10,26 @@ public class User implements Parcelable {
     private String fullName;
     private String phone;
     private String address;
-    private int userType;
-    private int gradeId;
     private String imageProfile;
     private boolean isDeleted;
 
-    private List<Course> courses;
-
     public User() {
-        courses = new ArrayList<>();
     }
 
     public User(String id) {
         this.id = id;
     }
 
-    public User(String username, String password, int userType) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.userType = userType;
-        courses = new ArrayList<>();
     }
 
-    public User(String username, String password, String fullName, String phone, int userType) {
+    public User(String username, String password, String fullName, String phone) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.phone = phone;
-        this.userType = userType;
-        courses = new ArrayList<>();
     }
 
     public String getId() {
@@ -84,14 +72,6 @@ public class User implements Parcelable {
         this.phone = phone;
     }
 
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
-
     public String getImageProfile() {
         return imageProfile;
     }
@@ -106,22 +86,6 @@ public class User implements Parcelable {
 
     public String getAddress() {
         return address;
-    }
-
-    public int getGradeId() {
-        return gradeId;
-    }
-
-    public void setGradeId(int gradeId) {
-        this.gradeId = gradeId;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 
     public boolean isDeleted() {
@@ -153,11 +117,8 @@ public class User implements Parcelable {
         dest.writeString(this.fullName);
         dest.writeString(this.phone);
         dest.writeString(this.address);
-        dest.writeInt(this.userType);
-        dest.writeInt(this.gradeId);
         dest.writeString(this.imageProfile);
         dest.writeByte(this.isDeleted ? (byte) 1 : (byte) 0);
-        dest.writeTypedList(this.courses);
     }
 
     public void readFromParcel(Parcel source) {
@@ -167,11 +128,8 @@ public class User implements Parcelable {
         this.fullName = source.readString();
         this.phone = source.readString();
         this.address = source.readString();
-        this.userType = source.readInt();
-        this.gradeId = source.readInt();
         this.imageProfile = source.readString();
         this.isDeleted = source.readByte() != 0;
-        this.courses = source.createTypedArrayList(Course.CREATOR);
     }
 
     protected User(Parcel in) {
@@ -181,11 +139,8 @@ public class User implements Parcelable {
         this.fullName = in.readString();
         this.phone = in.readString();
         this.address = in.readString();
-        this.userType = in.readInt();
-        this.gradeId = in.readInt();
         this.imageProfile = in.readString();
         this.isDeleted = in.readByte() != 0;
-        this.courses = in.createTypedArrayList(Course.CREATOR);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

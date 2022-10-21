@@ -41,7 +41,7 @@ public class CoursesGradesFragment extends Fragment {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        List<Grade> grades = DataManager.getGrades(getContext());
+        List<Grade> grades = new ArrayList<>();
         for (Grade grade : grades) {
             adapter.addFragment(CoursesFragment.newInstance(grade.getId()), grade.getName());
         }

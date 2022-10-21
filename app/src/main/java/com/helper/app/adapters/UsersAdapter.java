@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide;
 import com.helper.app.R;
 import com.helper.app.models.User;
 import com.helper.app.utils.StorageHelper;
-import com.helper.app.utils.UIHelper;
 
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         holder.name.setText(user.getFullName());
         holder.username.setText(user.getUsername());
-        holder.userType.setText(UIHelper.parseUserType(holder.userType.getContext(), user.getUserType()));
         holder.phone.setText(user.getPhone());
         holder.btnDelete.setVisibility(StorageHelper.getCurrentUser() != null ? StorageHelper.getCurrentUser().getId().equalsIgnoreCase(user.getId()) ? View.GONE : View.VISIBLE : View.GONE);
         if (user.getAddress() != null) {
@@ -79,7 +77,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             userType = view.findViewById(R.id.user_type);
             phone = view.findViewById(R.id.phone);
             address = view.findViewById(R.id.address);
-            btnDelete  = view.findViewById(R.id.btn_delete);
+            btnDelete = view.findViewById(R.id.btn_delete);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -34,7 +34,7 @@
             android:theme="@style/FullScreenTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.helper.app.activities.HomeActivity"
+            android:name="com.helper.app.activities.users.admin.HomeAdminActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ColoredStatusBar"
@@ -64,7 +64,7 @@
             android:theme="@style/AppTheme.ColoredStatusBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.helper.app.activities.users.admin.UserActivity"
+            android:name="com.helper.app.activities.users.admin.UserProfileActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ColoredStatusBar"

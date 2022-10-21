@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Attendance</string>
+    <string name="app_name" translatable="false">Helper</string>
     <string name="str_loading">Loading...</string>
 
     <string name="str_empty_data">There are no data added yet.</string>
@@ -46,6 +46,9 @@
     <string name="str_invalid_username_or_password">Invalid username or password: </string>
     <string name="str_login_successful">Login Successful</string>
 
+    <string name="str_login">Login</string>
+    <string name="str_registration">Registration</string>
+
     <string name="str_grade">Grade</string>
     <string name="str_grade_hint">Select Grade</string>
     <string name="str_grade_alert">Invalid Grade</string>
@@ -79,7 +82,7 @@
 
     <string name="str_course_summary_title">View Summary</string>
     <string name="str_course_viewer_title">View Course</string>
-    <string name="str_user_type_admin_title">New / Edit Admin</string>
+    <string name="str_user_profile_title">User Profile</string>
     <string name="str_user_type_student_title">New / Edit Student</string>
     <string name="str_user_type_lecturer_title">New / Edit Teacher</string>
     <string name="str_degree_per_lecture_summary">%s For Lecture</string>

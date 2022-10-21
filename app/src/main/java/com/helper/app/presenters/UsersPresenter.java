@@ -75,7 +75,7 @@ public class UsersPresenter implements BasePresenter {
         }
     }
 
-    public void getUsersByType(int type) {
+    public void getUsers() {
         callback.onShowLoading();
         listener = new ValueEventListener() {
             @Override
@@ -83,43 +83,7 @@ public class UsersPresenter implements BasePresenter {
                 List<User> users = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     User user = child.getValue(User.class);
-                    if (user.getUserType() == type && !user.isDeleted()) {
-                        users.add(user);
-                    }
-                }
-
-                if (callback != null) {
-                    Collections.sort(users, new Comparator<User>() {
-                        @Override
-                        public int compare(User o1, User o2) {
-                            return o1.getFullName().compareTo(o2.getFullName());
-                        }
-                    });
-                    callback.onGetUsersComplete(users);
-                    callback.onHideLoading();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                if (callback != null) {
-                    callback.onFailure("Unable to get message: " + databaseError.getMessage(), null);
-                    callback.onHideLoading();
-                }
-            }
-        };
-        reference.addListenerForSingleValueEvent(listener);
-    }
-
-    public void getUsersByGrade(int grade) {
-        callback.onShowLoading();
-        listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                List<User> users = new ArrayList<>();
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    User user = child.getValue(User.class);
-                    if (user.getGradeId() == grade && !user.isDeleted()) {
+                    if (!user.isDeleted()) {
                         users.add(user);
                     }
                 }

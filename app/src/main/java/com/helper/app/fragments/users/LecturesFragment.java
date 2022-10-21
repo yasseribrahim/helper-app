@@ -99,7 +99,7 @@ public class LecturesFragment extends Fragment implements ValueCallback, Lecture
 
         String userId = null;
         User user = StorageHelper.getCurrentUser();
-        if (user != null && user.getUserType() == Constants.USER_TYPE_STUDENT) {
+        if (user != null) {
             userId = user.getId();
         }
         isLecturerAccount = userId == null;

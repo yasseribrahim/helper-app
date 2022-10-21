@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.helper.app.R;
+import com.helper.app.activities.users.admin.UserProfileActivity;
 import com.helper.app.models.User;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.LocaleHelper;
@@ -38,7 +39,7 @@ public class LoginActivity extends BaseActivity {
     private ProgressBar progressBar;
     private EditText email, password;
     private FirebaseAuth auth;
-    private TextView login;
+    private TextView login, registration;
     private CheckBox rememberMe;
     private FirebaseDatabase database;
     private DatabaseReference userReference;
@@ -52,6 +53,7 @@ public class LoginActivity extends BaseActivity {
 
         rememberMe = findViewById(R.id.remember_me);
         login = findViewById(R.id.login);
+        registration = findViewById(R.id.registration);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         email = (EditText) findViewById(R.id.email);
@@ -67,6 +69,12 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
+        registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+            }
+        });
         database = FirebaseDatabase.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override

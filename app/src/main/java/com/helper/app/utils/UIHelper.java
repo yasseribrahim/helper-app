@@ -14,19 +14,6 @@ public class UIHelper {
         }
     }
 
-    public static String parseUserType(Context context, int id) {
-        switch (id) {
-            case Constants.USER_TYPE_ADMIN:
-                return context.getString(R.string.str_user_type_admin);
-            case Constants.USER_TYPE_STUDENT:
-                return context.getString(R.string.str_user_type_student);
-            case Constants.USER_TYPE_LECTURER:
-                return context.getString(R.string.str_user_type_teacher);
-            default:
-                return "N/A";
-        }
-    }
-
     public static String parseGrade(Context context, int id) {
         String[] grades = context.getResources().getStringArray(R.array.grades);
         switch (id) {

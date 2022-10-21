@@ -16,12 +16,10 @@ import com.helper.app.fragments.ProgressDialogFragment;
 import com.helper.app.models.Course;
 import com.helper.app.models.Lecture;
 import com.helper.app.models.Summary;
-import com.helper.app.models.User;
 import com.helper.app.presenters.LecturesCallback;
 import com.helper.app.presenters.LecturesPresenter;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.LocaleHelper;
-import com.helper.app.utils.StorageHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +61,7 @@ public class CourseSummaryActivity extends BaseActivity implements LecturesCallb
         course = getIntent().getParcelableExtra(Constants.ARG_OBJECT);
         presenter = new LecturesPresenter(this);
         message = findViewById(R.id.message);
-        User user = StorageHelper.getCurrentUser();
-        if (user != null && user.getUserType() == Constants.USER_TYPE_STUDENT) {
-            userId = user.getId();
-            isLecturerAccount = false;
-        } else {
-            isLecturerAccount = true;
-        }
+        isLecturerAccount = true;
         summaries = new ArrayList<>();
         lectures = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);

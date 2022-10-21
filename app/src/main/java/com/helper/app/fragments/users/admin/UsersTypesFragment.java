@@ -39,9 +39,9 @@ public class UsersTypesFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(UsersFragment.newInstance(Constants.USER_TYPE_STUDENT), getString(R.string.str_user_type_student));
-        adapter.addFragment(UsersFragment.newInstance(Constants.USER_TYPE_LECTURER), getString(R.string.str_user_type_teacher));
-        adapter.addFragment(UsersFragment.newInstance(Constants.USER_TYPE_ADMIN), getString(R.string.str_user_type_admin));
+        adapter.addFragment(UsersFragment.newInstance(), getString(R.string.str_user_type_student));
+        adapter.addFragment(UsersFragment.newInstance(), getString(R.string.str_user_type_teacher));
+        adapter.addFragment(UsersFragment.newInstance(), getString(R.string.str_user_type_admin));
         viewPager.setAdapter(adapter);
 
         return view;

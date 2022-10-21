@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.users.admin.UserActivity">
+    tools:context=".activities.users.admin.UserProfileActivity">
 
     <include layout="@layout/layout_tool_bar" />
 
@@ -20,7 +20,7 @@
         android:background="@null"
         android:gravity="center_horizontal"
         android:inputType="text"
-        android:text="@string/str_user_type_admin_title"
+        android:text="@string/str_user_profile_title"
         android:textColor="@color/colorAccent"
         android:textStyle="bold" />
 
@@ -67,47 +67,6 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
                     android:textSize="12sp" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/lbl_grade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:background="@null"
-                android:text="@string/str_grade"
-                android:textColor="@color/black_light"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:id="@+id/grade_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/border_background"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
-
-                <TextView
-                    android:id="@+id/grade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/str_grade_hint"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:src="@drawable/ic_arrow_down" />
             </FrameLayout>
 
             <TextView

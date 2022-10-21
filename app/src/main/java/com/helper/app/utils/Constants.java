@@ -10,18 +10,14 @@ public interface Constants {
     String ARG_ID = "id";
     String ARG_COURSE_ID = "course_id";
     String ARG_GRADE_ID = "grade_id";
-    String ARG_OBJECT= "object";
+    String ARG_OBJECT = "object";
 
     String TYPE_DRIVER = "6";
-    
-   int USER_TYPE_ADMIN = 1;
-   int USER_TYPE_STUDENT = 2;
-   int USER_TYPE_LECTURER = 3;
-    
-   int GRADE_1 = 1;
-   int GRADE_2 = 2;
-   int GRADE_3 = 3;
-   int GRADE_4 = 4;
+
+    int GRADE_1 = 1;
+    int GRADE_2 = 2;
+    int GRADE_3 = 3;
+    int GRADE_4 = 4;
 
     int GENDER_TYPE_MALE = 1;
     int GENDER_TYPE_FEMALE = 2;

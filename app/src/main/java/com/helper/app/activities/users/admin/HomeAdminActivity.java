@@ -1,4 +1,4 @@
-package com.helper.app.activities;
+package com.helper.app.activities.users.admin;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.helper.app.R;
 import com.helper.app.fragments.AboutFragment;
-import com.helper.app.fragments.HomeFragment;
 import com.helper.app.fragments.MoreFragment;
 import com.helper.app.fragments.users.admin.CoursesGradesFragment;
 import com.helper.app.fragments.users.admin.UsersTypesFragment;
@@ -28,7 +27,7 @@ import com.helper.app.utils.StorageHelper;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeAdminActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     protected Toolbar toolbar;
     private MenuItem previousItem;
@@ -49,46 +48,44 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        switch (item.getItemId()) {
-                            case R.id.nav_home:
-                                showFragment(HomeFragment.newInstance(), R.id.container);
-                                toolbar.setTitle(R.string.str_home);
-                                break;
-                            case R.id.nav_users:
-                                showFragment(UsersTypesFragment.newInstance(), R.id.container);
-                                toolbar.setTitle(R.string.str_users);
-                                break;
-                            case R.id.nav_courses:
-                                showFragment(CoursesGradesFragment.newInstance(), R.id.container);
-                                toolbar.setTitle(R.string.str_courses);
-                                break;
-                            case R.id.nav_about:
-                                showFragment(AboutFragment.newInstance(), R.id.container);
-                                toolbar.setTitle(R.string.str_about);
-                                break;
-                            case R.id.nav_more:
-                                showFragment(MoreFragment.newInstance(), R.id.container);
-                                toolbar.setTitle(R.string.str_more);
-                                break;
+                if (previousItem != null && previousItem.getItemId() != item.getItemId()) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (item.getItemId()) {
+                                case R.id.nav_users:
+                                    showFragment(UsersTypesFragment.newInstance(), R.id.container);
+                                    toolbar.setTitle(R.string.str_users);
+                                    break;
+                                case R.id.nav_courses:
+                                    showFragment(CoursesGradesFragment.newInstance(), R.id.container);
+                                    toolbar.setTitle(R.string.str_courses);
+                                    break;
+                                case R.id.nav_about:
+                                    showFragment(AboutFragment.newInstance(), R.id.container);
+                                    toolbar.setTitle(R.string.str_about);
+                                    break;
+                                case R.id.nav_more:
+                                    showFragment(MoreFragment.newInstance(), R.id.container);
+                                    toolbar.setTitle(R.string.str_more);
+                                    break;
+                            }
                         }
+                    }, 300);
+                    if (previousItem != null) {
+                        previousItem.setChecked(false);
                     }
-                }, 300);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                if (previousItem != null) {
-                    previousItem.setChecked(false);
+                    item.setChecked(true);
+                    previousItem = item;
                 }
-                item.setChecked(true);
-                previousItem = item;
+                drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
 
-        navigationView.setCheckedItem(R.id.nav_home);
-        showFragment(HomeFragment.newInstance(), R.id.container);
-        toolbar.setTitle(R.string.str_home);
+        navigationView.setCheckedItem(R.id.nav_users);
+        showFragment(UsersTypesFragment.newInstance(), R.id.container);
+        toolbar.setTitle(R.string.str_users);
 
         CircleImageView profileImage = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
         TextView username = navigationView.getHeaderView(0).findViewById(R.id.username);

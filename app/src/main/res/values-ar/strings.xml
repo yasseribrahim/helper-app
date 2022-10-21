@@ -49,6 +49,9 @@
     <string name="str_gender_type_male">ذكر</string>
     <string name="str_gender_type_female">انثى</string>
 
+    <string name="str_login">تسجيل الدخول</string>
+    <string name="str_registration">مستخدم جديد</string>
+
     <string name="str_grade"> الصف </string>
     <string name="str_grade_hint"> حدد الصف </string>
     <string name="str_grade_alert"> الصف غير صالح </string>
@@ -78,7 +81,7 @@
     <string name="str_user_type_student">طالب</string>
     <string name="str_user_type_teacher">مدرس</string>
 
-    <string name="str_user_type_admin_title"> مسؤول جديد / تعديل </string>
+    <string name="str_user_profile_title">بيانات مستخدم</string>
     <string name="str_user_type_student_title"> طالب جديد / تعديل </string>
     <string name="str_user_type_lecturer_title"> مدرس جديد / تعديل </string>
 

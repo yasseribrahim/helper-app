@@ -23,10 +23,9 @@ public class DataManager {
 
     public static void initUserAdmin() {
         User user = new User();
-        user.setId("TSC9qu8h02NVFSenAvo6h0pFjNu1");
-        user.setUserType(Constants.USER_TYPE_ADMIN);
-        user.setUsername("admin@attendance.com");
-        NODE_USERS.child("TSC9qu8h02NVFSenAvo6h0pFjNu1").setValue(user);
+        user.setId("PWLxoxf5D6NdAUPdIifTcwx5JLh2");
+        user.setUsername("admin@helper.com");
+        NODE_USERS.child("PWLxoxf5D6NdAUPdIifTcwx5JLh2").setValue(user);
     }
 
     public static void initAbout() {
@@ -42,121 +41,5 @@ public class DataManager {
 
         database.getReference(Constants.NODE_NAME_ABOUT).child("en").setValue(aboutEn);
         database.getReference(Constants.NODE_NAME_ABOUT).child("ar").setValue(aboutAr);
-    }
-
-    public static void initUsersLecturers(int counter) {
-        UsersPresenter presenter = new UsersPresenter(new UsersCallback() {
-            @Override
-            public void onFailure(String message, View.OnClickListener listener) {
-
-            }
-
-            @Override
-            public void onShowLoading() {
-
-            }
-
-            @Override
-            public void onHideLoading() {
-
-            }
-
-            @Override
-            public void onGetSignupUserComplete() {
-                if (counter < 10) {
-                    initUsersLecturers(counter + 1);
-                }
-            }
-        });
-
-        Log.i("DataManager", "Save: " + "student-" + counter + "@card-id.com");
-        User user = new User();
-        user.setUserType(Constants.USER_TYPE_LECTURER);
-        user.setUsername("lecturer-" + counter + "@card-id.com");
-        user.setFullName("Agent " + counter);
-        user.setAddress("Address " + counter);
-        user.setPassword("123456");
-        presenter.signup(user);
-    }
-
-    public static void initUsersStudents(int grade, int counter) {
-        final UsersPresenter presenter = new UsersPresenter(new UsersCallback() {
-            @Override
-            public void onFailure(String message, View.OnClickListener listener) {
-
-            }
-
-            @Override
-            public void onGetUsersComplete(List<User> users) {
-                for (User user : users) {
-                    user.setFullName(user.getFullName().replace("Agent", "Lecturer"));
-                    FirebaseDatabase dp = FirebaseDatabase.getInstance();
-                    DatabaseReference node = dp.getReference(Constants.NODE_NAME_USERS);
-                    node.child(user.getId()).setValue(user);
-                    Log.i("DataManager", "Save: " + user.getUsername());
-                }
-            }
-
-            @Override
-            public void onShowLoading() {
-
-            }
-
-            @Override
-            public void onHideLoading() {
-
-            }
-
-            @Override
-            public void onGetSignupUserComplete() {
-            }
-        });
-
-//        Log.i("DataManager", "Save: " + "student-" + counter + "-grade-" + grade + "@card-id.com");
-//        User user = new User();
-//        user.setUserType(Constants.USER_TYPE_STUDENT);
-//        user.setUsername("student-" + counter + "-grade-" + grade + "@card-id.com");
-//        user.setFullName("Student " + counter + " Grade " + grade);
-//        user.setGradeId(grade);
-//        user.setAddress("Address " + counter);
-//        user.setPassword("123456");
-        presenter.getUsersByType(Constants.USER_TYPE_LECTURER);
-    }
-
-    public static List<UserType> getUserTypes(Context context) {
-        List<UserType> types = new ArrayList<>();
-
-        for (int i = 1; i <= 4; i++) {
-            UserType type = new UserType();
-            type.setId(i);
-            switch (i) {
-                case Constants.USER_TYPE_ADMIN:
-                    type.setName(context.getString(R.string.str_user_type_admin));
-                    break;
-                case Constants.USER_TYPE_STUDENT:
-                    type.setName(context.getString(R.string.str_user_type_student));
-                    break;
-                case Constants.USER_TYPE_LECTURER:
-                    type.setName(context.getString(R.string.str_user_type_teacher));
-                    break;
-                default:
-                    type.setName("N/A");
-                    break;
-            }
-            types.add(type);
-        }
-        return types;
-    }
-
-    public static List<Grade> getGrades(Context context) {
-        List<Grade> grades = new ArrayList<>();
-        String[] gradesNames = context.getResources().getStringArray(R.array.grades);
-        for (int i = 1; i <= gradesNames.length; i++) {
-            Grade grade = new Grade();
-            grade.setId(i);
-            grade.setName(gradesNames[i - 1]);
-            grades.add(grade);
-        }
-        return grades;
     }
 }

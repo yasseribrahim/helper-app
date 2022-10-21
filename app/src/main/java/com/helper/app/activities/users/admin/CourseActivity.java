@@ -157,8 +157,8 @@ public class CourseActivity extends BaseUploadActivity implements UsersCallback,
     @Override
     protected void onResume() {
         super.onResume();
-        selectionUserTypeId = Constants.USER_TYPE_STUDENT;
-        presenter.getUsersByType(Constants.USER_TYPE_STUDENT);
+        selectionUserTypeId = -1;
+        presenter.getUsers();
     }
 
     @Override
@@ -171,16 +171,10 @@ public class CourseActivity extends BaseUploadActivity implements UsersCallback,
 
     @Override
     public void onGetUsersComplete(List<User> users) {
-        if (selectionUserTypeId == Constants.USER_TYPE_STUDENT) {
-            this.students.clear();
-            this.students.addAll(users);
-            filterUsers();
-            selectionUserTypeId = Constants.USER_TYPE_LECTURER;
-            presenter.getUsersByType(Constants.USER_TYPE_LECTURER);
-        } else {
-            this.lecturers.clear();
-            this.lecturers.addAll(users);
-        }
+        this.students.clear();
+        this.students.addAll(users);
+        filterUsers();
+        presenter.getUsers();
     }
 
     @Override
@@ -193,9 +187,7 @@ public class CourseActivity extends BaseUploadActivity implements UsersCallback,
         this.selectedStudents.clear();
 
         for (User user : students) {
-            if (user.getGradeId() == selectedGradeId) {
-                filteredStudents.add(user);
-            }
+            filteredStudents.add(user);
         }
         for (String id : course.getStudents()) {
             this.selectedStudents.add(new User(id));
@@ -241,7 +233,7 @@ public class CourseActivity extends BaseUploadActivity implements UsersCallback,
     private void showGradesDialog() {
         List<FilterItem> items = new ArrayList<>();
 
-        List<Grade> grades = DataManager.getGrades(this);
+        List<Grade> grades =new ArrayList<>();
         for (Grade grade : grades) {
             items.add(new FilterItem.Builder().code(grade.getId() + "").name(grade.getName()).build());
         }

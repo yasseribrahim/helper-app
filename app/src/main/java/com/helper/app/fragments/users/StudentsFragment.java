@@ -72,7 +72,7 @@ public class StudentsFragment extends Fragment implements UsersCallback, UsersSe
     }
 
     private void load() {
-        presenter.getUsersByGrade(course.getGradeId());
+        presenter.getUsers();
     }
 
     @Override

@@ -138,8 +138,6 @@ public class LectureActivity extends BaseActivity implements UsersCallback, User
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.getUsersByGrade(gradeId);
-
         if (reference != null && listener != null) {
             reference.addValueEventListener(listener);
         }
