@@ -8,7 +8,7 @@ public interface UsersCallback extends BaseCallback {
     default void onGetUsersComplete(List<User> users) {
     }
 
-    default void onGetSaveUserComplete() {
+    default void onSaveUserComplete() {
     }
 
     default void onGetDeleteUserComplete(int position) {

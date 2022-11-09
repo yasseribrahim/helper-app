@@ -27,7 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.helper.app.R;
-import com.helper.app.activities.users.admin.UserProfileActivity;
 import com.helper.app.models.User;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.LocaleHelper;
@@ -72,7 +71,7 @@ public class LoginActivity extends BaseActivity {
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
         database = FirebaseDatabase.getInstance();
@@ -98,7 +97,7 @@ public class LoginActivity extends BaseActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     User user = snapshot.getValue(User.class);
-                                    if(user == null) {
+                                    if (user == null) {
                                         user = new User(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         user.setUsername(email);
                                     }

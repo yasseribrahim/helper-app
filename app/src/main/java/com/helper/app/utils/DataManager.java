@@ -1,21 +1,9 @@
 package com.helper.app.utils;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.helper.app.R;
 import com.helper.app.models.About;
-import com.helper.app.models.Grade;
 import com.helper.app.models.User;
-import com.helper.app.models.UserType;
-import com.helper.app.presenters.UsersCallback;
-import com.helper.app.presenters.UsersPresenter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataManager {
     public static final FirebaseDatabase database = FirebaseDatabase.getInstance();

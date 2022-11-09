@@ -17,8 +17,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
-    private List<User> users;
-    private OnItemClickListener listener;
+    private final List<User> users;
+    private final OnItemClickListener listener;
 
     // data is passed into the constructor
     public UsersAdapter(List<User> users, OnItemClickListener listener) {
@@ -59,6 +59,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         return users.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemViewListener(int position);
+
+        void onDeleteItemViewListener(int position);
+    }
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView image;
@@ -91,11 +97,5 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                 }
             });
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemViewListener(int position);
-
-        void onDeleteItemViewListener(int position);
     }
 }

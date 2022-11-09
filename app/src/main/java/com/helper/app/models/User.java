@@ -3,6 +3,9 @@ package com.helper.app.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User implements Parcelable {
     private String id;
     private String username;
@@ -12,6 +15,7 @@ public class User implements Parcelable {
     private String address;
     private String imageProfile;
     private boolean isDeleted;
+    private List<String> networks;
 
     public User() {
     }
@@ -96,6 +100,17 @@ public class User implements Parcelable {
         isDeleted = deleted;
     }
 
+    public void setNetworks(List<String> networks) {
+        this.networks = networks;
+    }
+
+    public List<String> getNetworks() {
+        if (networks == null) {
+            this.networks = new ArrayList<>();
+        }
+        return networks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,6 +134,7 @@ public class User implements Parcelable {
         dest.writeString(this.address);
         dest.writeString(this.imageProfile);
         dest.writeByte(this.isDeleted ? (byte) 1 : (byte) 0);
+        dest.writeStringList(this.networks);
     }
 
     public void readFromParcel(Parcel source) {
@@ -130,6 +146,7 @@ public class User implements Parcelable {
         this.address = source.readString();
         this.imageProfile = source.readString();
         this.isDeleted = source.readByte() != 0;
+        this.networks = source.createStringArrayList();
     }
 
     protected User(Parcel in) {
@@ -141,6 +158,7 @@ public class User implements Parcelable {
         this.address = in.readString();
         this.imageProfile = in.readString();
         this.isDeleted = in.readByte() != 0;
+        this.networks = in.createStringArrayList();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

@@ -47,7 +47,7 @@ public class StorageHelper {
                 editor.apply();
             } catch (Exception ex) {
             }
-
+            currentUser = null;
             getCurrentUser();
         }
     }

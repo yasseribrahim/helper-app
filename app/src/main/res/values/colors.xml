@@ -15,11 +15,13 @@
 
     <color name="border_color">#e2e2e2</color>
     <color name="black_light">#484848</color>
-    <color name="red_dark">#8B0000</color>
 
     <color name="refreshColor4">#019DCD</color>
     <color name="refreshColor3">#8CAD4A</color>
     <color name="refreshColor2">#F47224</color>
     <color name="refreshColor1">#94257F</color>
 
+    <color name="grey_100">#F5F5F5</color>
+    <color name="item_chat_bg">@color/colorPrimary</color>
+    <color name="item_chat_other_bg">#e1e1e1</color>
 </resources>

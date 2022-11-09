@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.helper.app.CustomApplication;
-import com.helper.app.activities.users.teacher.HomeTeacherActivity;
-import com.helper.app.activities.users.student.HomeStudentActivity;
-import com.helper.app.models.User;
+import com.helper.app.presenters.FirebaseCallback;
+import com.helper.app.presenters.FirebasePresenter;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.LocaleHelper;
 import com.helper.app.utils.StorageHelper;
@@ -29,6 +28,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null && StorageHelper.getCurrentUser() != null) {
+                FirebasePresenter presenter = new FirebasePresenter(new FirebaseCallback() {
+                    @Override
+                    public void onFailure(String message, View.OnClickListener listener) {
+
+                    }
+
+                    @Override
+                    public void onShowLoading() {
+
+                    }
+
+                    @Override
+                    public void onHideLoading() {
+
+                    }
+                });
+                presenter.saveToken(StorageHelper.getCurrentUser());
+            }
+        } catch (Exception ex) {
+        }
     }
 
     protected Locale getCurrentLanguage() {
@@ -60,6 +82,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void openHome() {
         Intent intent = new Intent(this, HomeActivity.class);
+        if(getIntent().hasExtra("title")) {
+            String location = getIntent().getStringExtra("title");
+            intent.putExtra(Constants.ARG_OBJECT, location);
+        }
         startActivity(intent);
         finishAffinity();
     }

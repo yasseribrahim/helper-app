@@ -36,15 +36,36 @@
         <entry key="..\:/Projects/Android/attendance-app/app/src/main/res/menu/bottom_navigation_student.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/attendance-app/app/src/main/res/menu/bottom_navigation_teacher.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/attendance-app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2115" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable-v21/btn_orange_background.xml" value="0.2055" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/border_background.xml" value="0.211" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/btn_green_background.xml" value="0.1985" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/btn_primary_background.xml" value="0.1985" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/chat_rounded_rect_bg.xml" value="0.1855" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/ic_action_send_gray.xml" value="0.1855" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/ic_call_white.xml" value="0.2055" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/ic_dangerous.xml" value="0.153" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/ic_home.xml" value="0.192" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/ic_network.xml" value="0.192" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/drawable/rounded_more_border_color_gray.xml" value="0.1855" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_add_user.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_child_profile.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_course.xml" value="0.203125" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_forget_password.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_home.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_home_admin.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_lecture.xml" value="0.1" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_messaging.xml" value="0.33" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_registration.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_splash.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_user.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/activity_user_profile.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/fragment_card.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/fragment_dialog_alrt.xml" value="0.25" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/fragment_home.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/fragment_network.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/layout/item_chat_other.xml" value="0.20364583333333333" />
+        <entry key="..\:/Projects/Android/helper-app/app/src/main/res/menu/bottom_navigation.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/helper-app/app/src/main/res/menu/bottom_navigation_admin.xml" value="0.20364583333333333" />
         <entry key="..\:/Projects/Android/recruitment-labor-app/app/src/main/res/drawable/border_background.xml" value="0.2203125" />
         <entry key="..\:/Projects/Android/recruitment-labor-app/app/src/main/res/drawable/btn_green_background.xml" value="0.2203125" />

@@ -33,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import com.helper.app.CustomApplication;
 import com.helper.app.R;
 import com.helper.app.activities.SplashActivity;
-import com.helper.app.activities.users.admin.UserProfileActivity;
+import com.helper.app.activities.UserProfileActivity;
 import com.helper.app.models.User;
 import com.helper.app.utils.Constants;
 import com.helper.app.utils.StorageHelper;

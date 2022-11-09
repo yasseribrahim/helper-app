@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.helper.app.models.User;
 import com.helper.app.utils.Constants;
+import com.helper.app.utils.StorageHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,12 +57,14 @@ public class UsersPresenter implements BasePresenter {
         });
     }
 
-    public void save(User user) {
+    public void save(User... users) {
         FirebaseDatabase dp = FirebaseDatabase.getInstance();
         DatabaseReference node = dp.getReference(Constants.NODE_NAME_USERS);
-        node.child(user.getId()).setValue(user);
+        for (User user : users) {
+            node.child(user.getId()).setValue(user);
+        }
         if (callback != null) {
-            callback.onGetSaveUserComplete();
+            callback.onSaveUserComplete();
         }
     }
 
@@ -81,9 +84,10 @@ public class UsersPresenter implements BasePresenter {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 List<User> users = new ArrayList<>();
+                List<String> networks = StorageHelper.getCurrentUser().getNetworks();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     User user = child.getValue(User.class);
-                    if (!user.isDeleted()) {
+                    if (!user.isDeleted() && networks.contains(user.getId())) {
                         users.add(user);
                     }
                 }
