@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "1055656454499",
-    "project_id": "helper-app-b27e7",
-    "storage_bucket": "helper-app-b27e7.appspot.com"
+    "project_number": "751219610329",
+    "firebase_url": "https://new-app-23e50-default-rtdb.firebaseio.com",
+    "project_id": "new-app-23e50",
+    "storage_bucket": "new-app-23e50.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1055656454499:android:1ca672c024fb9c5cf84b56",
+        "mobilesdk_app_id": "1:751219610329:android:e22a83744396bd3d3964c8",
         "android_client_info": {
-          "package_name": "com.helper.app"
+          "package_name": "com.accident.warning.system.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1055656454499-4hnphjn2nakonmamn4ugb5mpqtdk11pl.apps.googleusercontent.com",
+          "client_id": "751219610329-6krhl60fm97lgogtqi28j6h7vq4nqem3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIPQD5oT_kzAmqWmeizVrjPTjZ2pV3_ck"
+          "current_key": "AIzaSyDCf09dSzMnL7wo6jQkv3XOYDIYCOyhZKE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1055656454499-4hnphjn2nakonmamn4ugb5mpqtdk11pl.apps.googleusercontent.com",
+              "client_id": "751219610329-6krhl60fm97lgogtqi28j6h7vq4nqem3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

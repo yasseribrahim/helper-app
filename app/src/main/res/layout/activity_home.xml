@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/design_default_color_background"
-    tools:context=".activities.HomeActivity">
+    tools:context="com.accident.warning.system.app.activities.HomeActivity">
 
     <include layout="@layout/layout_tool_bar" />
 
-    <com.helper.app.custom.CustomViewPager
+    <com.accident.warning.system.app.custom.CustomViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
