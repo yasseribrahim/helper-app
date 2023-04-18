@@ -45,6 +45,8 @@
     <string name="str_invalid_username_or_password">Invalid username or password: </string>
     <string name="str_login_successful">Login Successful</string>
 
+    <string name="str_alert_hint">If Speed decreased from 150 Km/H to 0 Km/H in time less than one seconds. app will be showing alert dialog to confirm if you fine or not.</string>
+    <string name="str_start_test">Start Test</string>
     <string name="str_login">Login</string>
     <string name="str_registration">Registration</string>
 

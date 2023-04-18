@@ -39,11 +39,16 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
     private ProgressBar progress;
     private ImageView qr;
     private TextView lblWelcome;
+
+    private TextView btnStartTest;
     private User user;
 
     private Handler handler = new Handler();
     private int counter;
     private List<Float> speeds;
+
+    private float previousSpeed = -1;
+    private long previousTime = -1;
 
     public static CardFragment newInstance() {
         Bundle args = new Bundle();
@@ -62,6 +67,7 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         userPath = Constants.NODE_NAME_USERS + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid();
         userReference = database.getReference(userPath);
         lblWelcome = view.findViewById(R.id.lbl_welcome);
+        btnStartTest = view.findViewById(R.id.btn_start_test);
         qr = view.findViewById(R.id.qr);
         progress = view.findViewById(R.id.progress);
         qr.setOnClickListener(this);
@@ -90,14 +96,20 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         digitSpeedView.updateSpeed(0);
 
         speeds = LocationUtils.getInstance().getSpeedTest();
-        handler.postDelayed(new Runnable() {
+
+        btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                if (counter < speeds.size()) {
-                    updateLocation();
-                }
+            public void onClick(View view) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (counter < speeds.size()) {
+                            updateLocation();
+                        }
+                    }
+                }, 2000);
             }
-        }, 2000);
+        });
 
         return view;
     }
@@ -110,19 +122,28 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         Float speed = speeds.get(counter);
         onSpeedUpdated(speed);
 
-        counter++;
-
-        if (counter < speeds.size()) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    updateLocation();
-                }
-            }, 10);
+        if (previousSpeed < 0) {
+            previousSpeed = speed;
+            previousTime = System.currentTimeMillis(); // current time by milli seconds
         } else {
-            try {
-                showAlertDialog();
-            }catch (Exception ex){}
+            float differenceSpeed = previousSpeed - speed;
+            long differenceTime = System.currentTimeMillis() - previousTime;
+            if (speed == 0 && differenceSpeed > 150 && differenceTime < 1000) {
+                try {
+                    showAlertDialog();
+                } catch (Exception ex) {
+                }
+            } else {
+                counter++;
+                if (counter < speeds.size()) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateLocation();
+                        }
+                    }, 10);
+                }
+            }
         }
     }
 

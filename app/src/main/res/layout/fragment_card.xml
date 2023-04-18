@@ -8,11 +8,10 @@
         android:id="@+id/lbl_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/container"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="@string/str_header_welcome"
         android:textColor="@color/green"
@@ -23,7 +22,7 @@
         android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/lbl_welcome"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/border_background"
@@ -43,13 +42,40 @@
             android:layout_height="300dp" />
     </FrameLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/digit_speed_view"
+        android:gravity="start"
+        android:text="@string/str_alert_hint"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <com.github.capur16.digitspeedviewlib.DigitSpeedView
         android:id="@+id/digit_speed_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/container"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
+        android:layout_above="@id/btn_start_test"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         app:backgroundColor="@color/background"
         app:disableBackgroundImage="true" />
+
+    <TextView
+        android:id="@+id/btn_start_test"
+        style="@style/CustomButtonPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/str_start_test"
+        android:textColor="@color/white" />
 </RelativeLayout>

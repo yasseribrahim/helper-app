@@ -77,9 +77,10 @@ public class LocationUtils {
 
     public List<Float> getSpeedTest() {
         List<Float> speeds = new ArrayList<>();
-        for (int i = 0; i <= 200; i++) {
+        for (int i = 0; i <= 150; i++) {
             speeds.add((float) i);
         }
+        speeds.add(0f);
         return speeds;
     }
 

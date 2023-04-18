@@ -41,6 +41,8 @@
     <string name="str_invalid_username_or_password"> اسم المستخدم أو كلمة المرور غير صالحة: </string>
     <string name="str_login_successful"> تم تسجيل الدخول بنجاح </string>
 
+    <string name="str_alert_hint">إذا انخفضت السرعة من 150 كم / ساعة إلى 0 كم / ساعة في وقت أقل من ثانية واحدة. سيعرض التطبيق مربع حوار تنبيه لتأكيد ما إذا كنت بخير أم لا.</string>
+    <string name="str_start_test">بدء الاختبار</string>
     <string name="str_login">تسجيل الدخول</string>
     <string name="str_registration">مستخدم جديد</string>
 
