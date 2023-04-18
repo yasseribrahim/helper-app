@@ -14,7 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.accident.warning.system.app.R;
+import com.accident.warning.system.app.models.User;
 import com.accident.warning.system.app.presenters.OnSpeedUpdatedCallback;
+import com.accident.warning.system.app.utils.BitmapHelper;
+import com.accident.warning.system.app.utils.Constants;
+import com.accident.warning.system.app.utils.LocationUtils;
 import com.github.capur16.digitspeedviewlib.DigitSpeedView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,11 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.accident.warning.system.app.R;
-import com.accident.warning.system.app.models.User;
-import com.accident.warning.system.app.utils.BitmapHelper;
-import com.accident.warning.system.app.utils.Constants;
-import com.accident.warning.system.app.utils.LocationUtils;
 
 import java.util.List;
 
@@ -100,6 +100,7 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                counter = 0;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -128,7 +129,7 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         } else {
             float differenceSpeed = previousSpeed - speed;
             long differenceTime = System.currentTimeMillis() - previousTime;
-            if (speed == 0 && differenceSpeed > 150 && differenceTime < 1000) {
+            if (speed == 0 && differenceSpeed >= 150 && differenceTime < 1000) {
                 try {
                     showAlertDialog();
                 } catch (Exception ex) {
