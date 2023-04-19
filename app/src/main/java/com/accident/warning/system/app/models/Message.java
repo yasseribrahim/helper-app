@@ -1,4 +1,5 @@
 package com.accident.warning.system.app.models;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +16,8 @@ public class Message implements Parcelable {
     private String message;
     @Expose
     private long timestamp;
+
+    private String location;
 
     public Message() {
     }
@@ -59,6 +62,14 @@ public class Message implements Parcelable {
         this.timestamp = timestamp;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -82,6 +93,7 @@ public class Message implements Parcelable {
         dest.writeString(this.receiveName);
         dest.writeString(this.message);
         dest.writeLong(this.timestamp);
+        dest.writeString(this.location);
     }
 
     public void readFromParcel(Parcel source) {
@@ -90,6 +102,7 @@ public class Message implements Parcelable {
         this.receiveName = source.readString();
         this.message = source.readString();
         this.timestamp = source.readLong();
+        this.location = source.readString();
     }
 
     protected Message(Parcel in) {
@@ -98,6 +111,7 @@ public class Message implements Parcelable {
         this.receiveName = in.readString();
         this.message = in.readString();
         this.timestamp = in.readLong();
+        this.location = in.readString();
     }
 
     public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>() {

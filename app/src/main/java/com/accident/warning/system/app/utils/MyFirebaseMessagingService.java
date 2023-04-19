@@ -15,11 +15,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.accident.warning.system.app.activities.SplashActivity;
+import com.accident.warning.system.app.R;
+import com.accident.warning.system.app.activities.MapsActivity;
 import com.accident.warning.system.app.models.Message;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.accident.warning.system.app.R;
 
 /**
  * NOTE: There can only be one service in each app that receives FCM messages. If multiple
@@ -75,6 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (title != null && message != null) {
             Message message1 = new Message();
             message1.setMessage(message);
+            message1.setLocation(title);
             sendNotification(message1);
         }
     }
@@ -125,7 +126,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(Message message) {
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra(Constants.ARG_OBJECT, message);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
