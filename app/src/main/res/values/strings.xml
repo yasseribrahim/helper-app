@@ -21,6 +21,7 @@
     <string name="str_please_type_message_firstly">Please type your message firstly</string>
     <string name="str_please_wait">Please wait...</string>
     <string name="str_fail_to_add">%s already added to your network</string>
+    <string name="str_setup_network">Please setup your network firstly</string>
 
     <string name="str_alert">Alert</string>
     <string name="str_alert_message">Are you well?</string>
@@ -45,8 +46,9 @@
     <string name="str_invalid_username_or_password">Invalid username or password: </string>
     <string name="str_login_successful">Login Successful</string>
 
-    <string name="str_alert_hint">If Speed decreased from 150 Km/H to 0 Km/H in time less than one seconds. app will be showing alert dialog to confirm if you fine or not.</string>
+    <string name="str_alert_hint">If Speed decreased from %s Km/H to 0 Km/H in time less than one seconds. app will be showing alert dialog to confirm if you fine or not.</string>
     <string name="str_start_test">Start Test</string>
+    <string name="str_need_help">I need help</string>
     <string name="str_login">Login</string>
     <string name="str_registration">Registration</string>
 

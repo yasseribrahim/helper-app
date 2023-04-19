@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class FirebasePresenter {
     private final static String URL = "https://fcm.googleapis.com/fcm/send";
-    private final static String KEY = "key=" + "AAAA9coHKWM:APA91bHa4iyWgj6diRHCt0UVVjXIflCDSv4nh8WfWEqDOvNiJ9nNIA2a6_hOlmB7FpCPRQwMAOWTP1C3UMVjxAYWwi88HhZm1YaJIsYIWHdxYJTW3TQxK5KgkqR7fFVtSY1yAqARBRB9";
+    private final static String KEY = "key=" + "AAAArugtktk:APA91bH54_rK6xXiGeLr7s4Fb5Pf7TZQaoo27ks00KV-6DIDw3K5ENmL4a-jTRm_SayOEj4iHiczF8IZV5rylWejI_GBBvRpLfqtBwQ6YVTSXgxjPmGRkeKUH0LglF_bWioHnyuSima-";
     private final static String CONTENT_TYPE = "application/json";
 
     private DatabaseReference reference;

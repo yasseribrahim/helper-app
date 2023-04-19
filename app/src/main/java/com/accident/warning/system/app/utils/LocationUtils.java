@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class LocationUtils {
+    public static final float TEST_SPEED = 80;
     private static final LocationUtils UTILS = new LocationUtils();
     private LocationModel previousModel;
 
@@ -77,7 +78,7 @@ public class LocationUtils {
 
     public List<Float> getSpeedTest() {
         List<Float> speeds = new ArrayList<>();
-        for (int i = 0; i <= 150; i++) {
+        for (int i = 0; i <= TEST_SPEED; i++) {
             speeds.add((float) i);
         }
         speeds.add(0f);

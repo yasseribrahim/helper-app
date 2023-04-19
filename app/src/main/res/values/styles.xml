@@ -60,6 +60,10 @@
         <item name="android:background">@drawable/btn_primary_background</item>
     </style>
 
+    <style name="CustomButtonOrange" parent="CustomButton">
+        <item name="android:background">@drawable/btn_orange_background</item>
+    </style>
+
     <style name="CustomButtonPrimaryOutline" parent="CustomButton">
         <item name="android:background">@drawable/btn_white_background</item>
     </style>

@@ -12,14 +12,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.accident.warning.system.app.R;
+import com.accident.warning.system.app.models.LocationModel;
+import com.accident.warning.system.app.models.Message;
 import com.accident.warning.system.app.models.User;
+import com.accident.warning.system.app.presenters.FirebaseCallback;
+import com.accident.warning.system.app.presenters.FirebasePresenter;
 import com.accident.warning.system.app.presenters.OnSpeedUpdatedCallback;
 import com.accident.warning.system.app.utils.BitmapHelper;
 import com.accident.warning.system.app.utils.Constants;
+import com.accident.warning.system.app.utils.LocationManager;
 import com.accident.warning.system.app.utils.LocationUtils;
+import com.accident.warning.system.app.utils.StorageHelper;
 import com.github.capur16.digitspeedviewlib.DigitSpeedView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class CardFragment extends Fragment implements View.OnClickListener, OnSpeedUpdatedCallback {
+public class CardFragment extends Fragment implements FirebaseCallback, View.OnClickListener, OnSpeedUpdatedCallback {
     private FirebaseDatabase database;
     private DatabaseReference userReference;
     private ValueEventListener valueEventListenerUser;
@@ -39,10 +46,14 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
     private ProgressBar progress;
     private ImageView qr;
     private TextView lblWelcome;
-
     private TextView btnStartTest;
+    private TextView btnNeedHelp;
+    private TextView lblAlertHint;
     private User user;
 
+    private FirebasePresenter presenter;
+    private LocationManager locationManager;
+    private LocationModel locationModel;
     private Handler handler = new Handler();
     private int counter;
     private List<Float> speeds;
@@ -63,14 +74,21 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card, container, false);
 
+        presenter = new FirebasePresenter(this);
+        locationManager = new LocationManager();
+
         database = FirebaseDatabase.getInstance();
         userPath = Constants.NODE_NAME_USERS + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid();
         userReference = database.getReference(userPath);
         lblWelcome = view.findViewById(R.id.lbl_welcome);
         btnStartTest = view.findViewById(R.id.btn_start_test);
+        btnNeedHelp = view.findViewById(R.id.btn_need_help);
+        lblAlertHint = view.findViewById(R.id.lbl_alert_hint);
         qr = view.findViewById(R.id.qr);
         progress = view.findViewById(R.id.progress);
         qr.setOnClickListener(this);
+
+        lblAlertHint.setText(getString(R.string.str_alert_hint, LocationUtils.TEST_SPEED + ""));
 
         valueEventListenerUser = new ValueEventListener() {
             @Override
@@ -97,10 +115,36 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
 
         speeds = LocationUtils.getInstance().getSpeedTest();
 
+        btnNeedHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationManager.triggerLocation((AppCompatActivity) getContext(), new LocationManager.LocationListener() {
+                    @Override
+                    public void onLocationAvailable(LocationModel model) {
+                        User currentUser = StorageHelper.getCurrentUser();
+                        List<String> network = currentUser.getNetworks();
+
+                        locationModel = model;
+                        if (!network.isEmpty()) {
+                            presenter.getTokens(network);
+                        } else {
+                            Toast.makeText(getContext(), R.string.str_setup_network, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Status status) {
+                        Toast.makeText(getContext(), "General Error", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 counter = 0;
+                btnStartTest.setText(R.string.str_please_wait);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -115,6 +159,21 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         return view;
     }
 
+    @Override
+    public void onGetTokensComplete(List<String> tokens) {
+        Message message = new Message();
+
+        User user = StorageHelper.getCurrentUser();
+        message.setMessage(getString(R.string.str_notification, user.getFullName()));
+        message.setSenderName(locationModel.toString());
+        presenter.send(message, tokens);
+    }
+
+    @Override
+    public void onSendNotificationComplete() {
+        Toast.makeText(getContext(), "Message sent", Toast.LENGTH_LONG).show();
+    }
+
     private void showAlertDialog() {
         AlertDialog.newInstance().show(getChildFragmentManager(), "");
     }
@@ -126,24 +185,28 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         if (previousSpeed < 0) {
             previousSpeed = speed;
             previousTime = System.currentTimeMillis(); // current time by milli seconds
+        }
+
+        float differenceSpeed = previousSpeed - speed;
+        long differenceTime = System.currentTimeMillis() - previousTime;
+        if (speed == 0 && differenceSpeed >= LocationUtils.TEST_SPEED && differenceTime < 1000) {
+            try {
+                showAlertDialog();
+
+                btnStartTest.setText(R.string.str_start_test);
+            } catch (Exception ex) {
+            }
         } else {
-            float differenceSpeed = previousSpeed - speed;
-            long differenceTime = System.currentTimeMillis() - previousTime;
-            if (speed == 0 && differenceSpeed >= 150 && differenceTime < 1000) {
-                try {
-                    showAlertDialog();
-                } catch (Exception ex) {
-                }
-            } else {
-                counter++;
-                if (counter < speeds.size()) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateLocation();
-                        }
-                    }, 10);
-                }
+            counter++;
+            previousSpeed = speed;
+            previousTime = System.currentTimeMillis();
+            if (counter < speeds.size()) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateLocation();
+                    }
+                }, 10);
             }
         }
     }
@@ -162,6 +225,7 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
         valueEventListenerUser = null;
         userReference = null;
         database = null;
+        locationManager.stop();
     }
 
     @Override
@@ -170,5 +234,20 @@ public class CardFragment extends Fragment implements View.OnClickListener, OnSp
             case R.id.qr:
                 break;
         }
+    }
+
+    @Override
+    public void onFailure(String message, View.OnClickListener listener) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onShowLoading() {
+        ProgressDialogFragment.show(getChildFragmentManager());
+    }
+
+    @Override
+    public void onHideLoading() {
+        ProgressDialogFragment.hide(getChildFragmentManager());
     }
 }
