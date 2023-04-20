@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.accident.warning.system.app.fragments.NotificationsFragment;
 import com.accident.warning.system.app.presenters.OnSpeedUpdatedCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +39,6 @@ public class HomeActivity extends BaseActivity implements LocationManager.Locati
     private SectionsPagerAdapter sectionsPagerAdapter;
     private BottomNavigationView navigation;
     private LocationManager locationManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleHelper.setLocale(this, getCurrentLanguage().getLanguage());
@@ -82,11 +82,14 @@ public class HomeActivity extends BaseActivity implements LocationManager.Locati
             case R.id.nav_network:
                 pager.setCurrentItem(1);
                 return true;
-            case R.id.nav_about:
+            case R.id.nav_notification:
                 pager.setCurrentItem(2);
                 return true;
-            case R.id.nav_more:
+            case R.id.nav_about:
                 pager.setCurrentItem(3);
+                return true;
+            case R.id.nav_more:
+                pager.setCurrentItem(4);
                 return true;
         }
         return false;
@@ -114,6 +117,7 @@ public class HomeActivity extends BaseActivity implements LocationManager.Locati
 
         sectionsPagerAdapter.addFrag(CardFragment.newInstance(), getString(R.string.str_home));
         sectionsPagerAdapter.addFrag(NetworkFragment.newInstance(), getString(R.string.str_network));
+        sectionsPagerAdapter.addFrag(NotificationsFragment.newInstance(), getString(R.string.str_notifications));
         sectionsPagerAdapter.addFrag(AboutFragment.newInstance(), getString(R.string.str_about));
         sectionsPagerAdapter.addFrag(MoreFragment.newInstance(), getString(R.string.str_more));
 

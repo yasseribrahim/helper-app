@@ -221,7 +221,6 @@ public class NetworkFragment extends Fragment implements UsersCallback, UsersAda
     @Override
     public void onItemViewListener(int position) {
         User user = searchedUsers.get(position);
-
     }
 
     @Override
@@ -233,7 +232,7 @@ public class NetworkFragment extends Fragment implements UsersCallback, UsersAda
             if (index >= 0 && index < users.size()) {
                 users.remove(position);
             }
-            presenter.delete(user, position);
+            presenter.deleteNetwork(user, position);
         }
     }
 

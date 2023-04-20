@@ -6,6 +6,7 @@ public interface Constants {
     String NODE_NAME_TOKENS = "tokens";
     String NODE_NAME_ABOUT = "about";
     String NODE_NAME_USERS = "users";
+    String NODE_NAME_NOTIFICATIONS = "notifications";
     String NODE_NAME_IMAGES = "images";
 
     String ARG_ID = "id";

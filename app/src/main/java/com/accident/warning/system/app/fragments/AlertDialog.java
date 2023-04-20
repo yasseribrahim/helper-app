@@ -21,9 +21,12 @@ import androidx.fragment.app.DialogFragment;
 import com.accident.warning.system.app.R;
 import com.accident.warning.system.app.models.LocationModel;
 import com.accident.warning.system.app.models.Message;
+import com.accident.warning.system.app.models.Notification;
 import com.accident.warning.system.app.models.User;
 import com.accident.warning.system.app.presenters.FirebaseCallback;
 import com.accident.warning.system.app.presenters.FirebasePresenter;
+import com.accident.warning.system.app.presenters.NotificationsCallback;
+import com.accident.warning.system.app.presenters.NotificationsPresenter;
 import com.accident.warning.system.app.utils.LocationManager;
 import com.accident.warning.system.app.utils.SimpleCountDownTimer;
 import com.accident.warning.system.app.utils.StorageHelper;
@@ -91,6 +94,26 @@ public class AlertDialog extends DialogFragment implements FirebaseCallback, Sim
         User user = StorageHelper.getCurrentUser();
         message.setMessage(getString(R.string.str_notification, user.getFullName()));
         message.setSenderName(locationModel.toString());
+        Notification notification = new Notification();
+        notification.setMessage(message.getMessage());
+        notification.setLocation(locationModel.toString());
+        new NotificationsPresenter(new NotificationsCallback() {
+            @Override
+            public void onFailure(String message, View.OnClickListener listener) {
+
+            }
+
+            @Override
+            public void onShowLoading() {
+
+            }
+
+            @Override
+            public void onHideLoading() {
+
+            }
+        }).save(notification, user.getNetworks().toArray(new String[]{}));
+
         presenter.send(message, tokens);
     }
 

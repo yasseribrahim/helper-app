@@ -18,6 +18,7 @@ import androidx.work.WorkManager;
 import com.accident.warning.system.app.R;
 import com.accident.warning.system.app.activities.MapsActivity;
 import com.accident.warning.system.app.models.Message;
+import com.accident.warning.system.app.models.Notification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -73,10 +74,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         if (title != null && message != null) {
-            Message message1 = new Message();
-            message1.setMessage(message);
-            message1.setLocation(title);
-            sendNotification(message1);
+            Notification notification = new Notification();
+            notification.setMessage(message);
+            notification.setLocation(title);
+            sendNotification(notification);
         }
     }
 
@@ -125,9 +126,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.handleIntent(intent);
     }
 
-    private void sendNotification(Message message) {
+    private void sendNotification(Notification notification) {
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra(Constants.ARG_OBJECT, message);
+        intent.putExtra(Constants.ARG_OBJECT, notification);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
@@ -138,7 +139,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(getString(R.string.app_name))
-                        .setContentText(message.getMessage())
+                        .setContentText(notification.getMessage())
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);

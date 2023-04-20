@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.accident.warning.system.app.R;
-import com.accident.warning.system.app.models.Message;
+import com.accident.warning.system.app.models.Notification;
 import com.accident.warning.system.app.utils.Constants;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,20 +27,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     protected GoogleMap googleMap;
     protected Marker marker;
-    private Message message;
+    private Notification notification;
     private double latitude, longitude;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.maps_activity);
+        setContentView(R.layout.activity_maps);
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         supportMapFragment.getMapAsync(this);
 
-        message = getIntent().getParcelableExtra(Constants.ARG_OBJECT);
+        notification = getIntent().getParcelableExtra(Constants.ARG_OBJECT);
         try {
-            String[] values = message.getLocation().split(",");
+            String[] values = notification.getLocation().split(",");
             latitude = Double.parseDouble(values[0]);
             longitude = Double.parseDouble(values[1]);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         // Set position of marker
         markerOptions.position(latLng);
         // Set title of marker
-        markerOptions.title(message.getMessage());
+        markerOptions.title(notification.getMessage());
 
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmap(R.drawable.ic_face)));
         // Remove all marker

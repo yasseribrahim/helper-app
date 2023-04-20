@@ -1,6 +1,7 @@
 <resources>
     <string name="str_empty_data">لا توجد بيانات المضافة حتى الان.</string>
 
+    <string name="str_go_to_maps">اذهب إلى الخرائط</string>
     <string name="str_add_user">اضافة صديق</string>
 
     <string name="str_chat">محادثة</string>
@@ -20,6 +21,7 @@
     <string name="str_search_hint">بحث</string>
     <string name="str_home">الرئيسية</string>
     <string name="str_network"> شبكتى </string>
+    <string name="str_notifications">إشعارات</string>
     <string name="str_about">عن التطتبيق</string>
     <string name="str_more"> المزيد </string>
 

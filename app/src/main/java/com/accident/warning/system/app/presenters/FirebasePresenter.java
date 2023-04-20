@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.accident.warning.system.app.models.Message;
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.accident.warning.system.app.CustomApplication;
-import com.accident.warning.system.app.models.Message;
 import com.accident.warning.system.app.models.User;
 import com.accident.warning.system.app.utils.Constants;
 

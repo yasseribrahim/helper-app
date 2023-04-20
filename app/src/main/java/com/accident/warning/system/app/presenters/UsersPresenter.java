@@ -2,6 +2,9 @@ package com.accident.warning.system.app.presenters;
 
 import androidx.annotation.NonNull;
 
+import com.accident.warning.system.app.models.User;
+import com.accident.warning.system.app.utils.Constants;
+import com.accident.warning.system.app.utils.StorageHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -11,9 +14,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.accident.warning.system.app.models.User;
-import com.accident.warning.system.app.utils.Constants;
-import com.accident.warning.system.app.utils.StorageHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,11 +68,15 @@ public class UsersPresenter implements BasePresenter {
         }
     }
 
-    public void delete(User user, int position) {
+    public void deleteNetwork(User user, int position) {
         FirebaseDatabase dp = FirebaseDatabase.getInstance();
         DatabaseReference node = dp.getReference(Constants.NODE_NAME_USERS);
-        user.setDeleted(true);
-        node.child(user.getId()).setValue(user);
+
+        User currentUser = StorageHelper.getCurrentUser();
+        List<String> networks = currentUser.getNetworks();
+        networks.remove(user.getId());
+        node.child(currentUser.getId()).setValue(currentUser);
+        StorageHelper.setCurrentUser(currentUser);
         if (callback != null) {
             callback.onGetDeleteUserComplete(position);
         }

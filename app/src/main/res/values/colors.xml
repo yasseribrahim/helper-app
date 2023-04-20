@@ -21,6 +21,7 @@
     <color name="refreshColor2">#F47224</color>
     <color name="refreshColor1">#94257F</color>
 
+    <color name="orange">#F47224</color>
     <color name="grey_100">#F5F5F5</color>
     <color name="item_chat_bg">@color/colorPrimary</color>
     <color name="item_chat_other_bg">#e1e1e1</color>

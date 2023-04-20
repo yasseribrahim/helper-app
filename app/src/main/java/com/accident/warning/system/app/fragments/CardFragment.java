@@ -18,9 +18,12 @@ import androidx.fragment.app.Fragment;
 import com.accident.warning.system.app.R;
 import com.accident.warning.system.app.models.LocationModel;
 import com.accident.warning.system.app.models.Message;
+import com.accident.warning.system.app.models.Notification;
 import com.accident.warning.system.app.models.User;
 import com.accident.warning.system.app.presenters.FirebaseCallback;
 import com.accident.warning.system.app.presenters.FirebasePresenter;
+import com.accident.warning.system.app.presenters.NotificationsCallback;
+import com.accident.warning.system.app.presenters.NotificationsPresenter;
 import com.accident.warning.system.app.presenters.OnSpeedUpdatedCallback;
 import com.accident.warning.system.app.utils.BitmapHelper;
 import com.accident.warning.system.app.utils.Constants;
@@ -167,6 +170,26 @@ public class CardFragment extends Fragment implements FirebaseCallback, View.OnC
         message.setMessage(getString(R.string.str_notification, user.getFullName()));
         message.setSenderName(locationModel.toString());
         presenter.send(message, tokens);
+
+        Notification notification = new Notification();
+        notification.setMessage(message.getMessage());
+        notification.setLocation(locationModel.toString());
+        new NotificationsPresenter(new NotificationsCallback() {
+            @Override
+            public void onFailure(String message, View.OnClickListener listener) {
+
+            }
+
+            @Override
+            public void onShowLoading() {
+
+            }
+
+            @Override
+            public void onHideLoading() {
+
+            }
+        }).save(notification, user.getNetworks().toArray(new String[]{}));
     }
 
     @Override
